@@ -6,7 +6,7 @@ require("dotenv").config();
 const appid = process.env.appid;
 
 //Criação das constantes para formação da url final
-const q = "Itu";
+const q = "Sao Paulo";
 const units = "metric";
 const lang = "pt_BR";
 const cnt = "10";
@@ -44,3 +44,12 @@ axios
             `)
         }
     })
+    .then((res) => {
+        //verifica quantas previsões têm percepção humana de tempertura acima de 30 graus
+        
+        const lista = res.filter(r => r.main.feels_like >= 30);
+        console.log (`${lista.length} previsões têm percepção humana de temperatura acima de 30 graus`)
+    })
+    .catch((err) => {
+        console.log("Deu erro:", err);
+     });
